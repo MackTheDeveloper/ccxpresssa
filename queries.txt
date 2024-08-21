@@ -1,0 +1,470 @@
+  14-03-2019
+----------
+
+2.11 - Done
+Live - Done
+
+1.
+  => create new column in cargo table
+  => name : rental_starting_date
+  => query: ALTER TABLE `cargo` ADD `rental_starting_date` DATE NULL DEFAULT NULL AFTER `opening_date`; 
+
+2.
+  => create new column in cargo table
+  => name : rental_ending_date
+  => query: ALTER TABLE `cargo` ADD `rental_ending_date` DATE NULL DEFAULT NULL AFTER `rental_starting_date`;
+
+
+3.
+  => create new column in cargo table
+  => name : rental
+  => type : enum (1 = rental,2 = non-rental)
+  => query: ALTER TABLE `cargo` ADD `rental` ENUM('0' ,'1') NULL DEFAULT '0' COMMENT '1 = "rental" and 0 = "non-rental"' AFTER `opening_date`;
+
+4.
+  => create new column in cargo table
+  => name : rental_cost
+  => type : decimal
+  => query: ALTER TABLE `cargo` ADD `rental_cost` DECIMAL(20) NULL DEFAULT NULL AFTER `rental_ending_date`;
+
+
+16-03-2019
+----------
+
+2.11 - Done
+Live - Done
+
+1.
+ => create new column in hawp_packages
+ => name : measure_weight
+ => type : enum
+ => query : ALTER TABLE `hawb_packages` ADD `measure_weight` ENUM("k","p") NULL DEFAULT NULL COMMENT 'k = "kg" p="pound"' AFTER `pweight`;
+
+2.
+ => create new column in hawp_packages
+ => name : measure_volume
+ => type : enum
+ => query : ALTER TABLE `hawb_packages` ADD `measure_volume` ENUM("m","f") NULL DEFAULT NULL COMMENT 'm = "meter" f="foot"' AFTER `pvolume`;
+
+ 3.
+  => create new column in cargo_packages
+  => name : measure_weight
+  => type : enum
+  => query : ALTER TABLE `cargo_packages` ADD `measure_weight` ENUM("k","p") NOT NULL COMMENT 'k = "kg" p="pound"' AFTER `pweight`;
+ 
+ 4.
+  => create new column in cargo_packages
+  => name : measure_volume
+  => type : enum
+  => query : ALTER TABLE `cargo_packages` ADD `measure_volume` ENUM("m","f") NULL DEFAULT NULL COMMENT 'm = "meter" f="foot"' AFTER `pvolume`;
+
+25-03-2019
+----------
+
+2.11 - Done
+Live - Done
+
+ 1.
+ => Create payment_accepted_by column in invoice_payment table
+ => name: payment_accepted_by
+ => type: int
+ => query: "ALTER TABLE `invoice_payments` ADD `payment_accepted_by` INT(20) NULL DEFAULT NULL AFTER `payment_via_note`;"
+
+26-03-2019
+----------
+2.11 - Done
+Live - Done
+1.
+=> Create rental_paid_status colume
+=> name : rental_paid_status
+=> type: enum
+=> query : "ALTER TABLE `cargo` ADD `rental_paid_status` ENUM('p','up') NULL DEFAULT NULL COMMENT 'p = paid , up = unpaid' AFTER `rental_cost`;"
+
+
+01-04-2019
+----------
+2.11 - Done
+Live - Done
+1.
+=> Create New column
+=> name : contract_months
+=> query : ALTER TABLE `cargo` ADD `` INT NULL DEFAULT NULL AFTER `rental_cost`;
+
+
+03-04-2019
+----------
+2.11 - Done
+Live - Done
+1.
+=> Create new column
+=> name :mail_send
+=> query :ALTER TABLE `local_invoice_payment_detail` ADD `mail_send` ENUM("0","1") NULL DEFAULT NULL COMMENT '"0"->"mail is not send","1"->"Mail has been send"' AFTER `status`;
+
+2. 
+=> Create new columns
+=> name : updated_by,updated_at
+=> query : ALTER TABLE `local_invoice_payment_detail` ADD `updated_by` INT(5) NULL DEFAULT NULL AFTER `created_at`, ADD `updated_at` DATETIME NULL DEFAULT NULL AFTER `updated_by`;
+
+3.
+
+=> Make forign key
+=> queries : 
+ALTER TABLE `local_invoice_payment_detail` ADD INDEX(`local_invoice_id`);
+ALTER TABLE `local_invoice_payment_detail` ADD FOREIGN KEY (`local_invoice_id`) REFERENCES `cargo`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+08-04-2019
+----------
+2.11 - Done
+Live - Done
+1.
+=> Create new column
+=> name : duration
+=> query : ALTER TABLE `local_invoice_payment_detail` ADD `duration` VARCHAR(20) NULL DEFAULT NULL AFTER `date`;
+
+
+18-04-2019
+----------
+2.11 - Done
+Live - Done
+
+1.Create table ups_export_detail
+2.Create column import_id
+=>query :ALTER TABLE `ups_export_details` ADD `import_id` INT(20) NULL DEFAULT NULL AFTER `id`;
+
+3. ALTER TABLE `ups_export_details` ADD `shipper_address_2` TEXT NULL DEFAULT NULL AFTER `shipper_address`;
+
+4.ALTER TABLE `ups_export_details` ADD `consignee_city_state` TEXT NULL DEFAULT NULL AFTER `consignee_address`;
+
+5.ALTER TABLE `ups_export_details` ADD `destination_country` TEXT NULL DEFAULT NULL AFTER `consignee_city_state`;
+
+6.ALTER TABLE `ups_export_details` ADD `unit` VARCHAR(20) NULL DEFAULT NULL AFTER `weight`;
+
+7.ALTER TABLE `ups_export_details` ADD `dim_weight` VARCHAR(20) NULL DEFAULT NULL AFTER `unit`;
+
+8.ALTER TABLE `ups_export_details` ADD `dim_weight_unit` VARCHAR(20) NULL DEFAULT NULL AFTER `dim_weight`;
+
+9.ALTER TABLE `ups_export_details` ADD `currency` VARCHAR(20) NULL DEFAULT NULL AFTER `declared_value`;
+
+10.ALTER TABLE `ups_export_details` ADD `HS_CODE` VARCHAR(50) NULL DEFAULT NULL AFTER `currency`;
+
+11. ALTER TABLE `ups_export_details` ADD `freight_currency` VARCHAR(20) NULL DEFAULT NULL AFTER `freight`;
+
+12.ALTER TABLE `ups_export_details` ADD `shipper_account_no` VARCHAR(500) NULL DEFAULT NULL AFTER `destination`;
+
+13.ALTER TABLE `ups_export_details` ADD `shipper_contract` VARCHAR(500) NULL DEFAULT NULL AFTER `shipper_name`;
+
+14.ALTER TABLE `ups_export_details` ADD `country` VARCHAR(255) NULL DEFAULT NULL AFTER `shipper_city_state_zip`;
+
+
+20-04-2019
+----------
+2.11 - Done
+Live - Done
+
+1. ALTER TABLE `ups_details` ADD `shipment_number` VARCHAR(255) NULL DEFAULT NULL AFTER `origin`;
+
+2. ALTER TABLE `ups_details` ADD `description` TEXT NULL DEFAULT NULL AFTER `ups_status`;
+
+3. ALTER TABLE `ups_details` ADD `shipper_contact` VARCHAR(255) NULL DEFAULT NULL AFTER `shipper_address`;
+
+4. ALTER TABLE `ups_details` ADD `shipper_address_2` TEXT NULL DEFAULT NULL AFTER `shipper_address`;
+
+5. ALTER TABLE `ups_details` ADD `consignee_city_state` TEXT NULL DEFAULT NULL AFTER `consignee_address`;
+
+6. ALTER TABLE `ups_details` ADD `unit` VARCHAR(255) NULL DEFAULT NULL AFTER `weight`, ADD `dim_weight` DECIMAL NULL DEFAULT NULL AFTER `unit`, ADD `dim_unit` VARCHAR(255) NULL DEFAULT NULL AFTER `dim_weight`;
+
+7. ALTER TABLE `ups_details` ADD `freight_currency` VARCHAR(255) NULL DEFAULT NULL AFTER `freight`;
+
+8. ALTER TABLE `ups_freight_commission` ADD FOREIGN KEY (`ups_file_id`) REFERENCES `ups_details`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+9. ALTER TABLE `ups_freight_commission` ADD `created_by` INT NULL DEFAULT NULL AFTER `commission`, ADD `created_at` DATETIME NULL DEFAULT NULL AFTER `created_by`, ADD `updated_by` INT NULL DEFAULT NULL AFTER `created_at`, ADD `updated_at` DATETIME NULL DEFAULT NULL AFTER `updated_by`, ADD `deleted` ENUM("0","1") NULL DEFAULT NULL COMMENT '"0"="not Deleted","1"="Deleted"' AFTER `updated_at`, ADD `deleted_by` INT NULL DEFAULT NULL AFTER `deleted`, ADD `deleted_at` DATETIME NULL DEFAULT NULL AFTER `deleted_by`;
+
+10. ALTER TABLE `ups_freight_commission` CHANGE `deleted` `deleted` ENUM('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0' COMMENT '"0"="not Deleted","1"="Deleted"';
+
+
+27-04-2019
+----------
+2.11 - Done
+Live - Done
+
+1. Create "ups_import_export_commission" table
+
+2. ALTER TABLE `ups_import_export_commission` CHANGE `deleted` `deleted` ENUM('0','1') NULL DEFAULT NULL COMMENT '\'1\' = deleted, \'0\' = \'not\'';
+
+3. ALTER TABLE `ups_import_export_commission` ADD `deleted_by` INT(255) NULL DEFAULT NULL AFTER `deleted`;
+
+4. ALTER TABLE `ups_import_export_commission` ADD `deleted_at` DATETIME NULL DEFAULT NULL AFTER `deleted_by`;
+
+5. ALTER TABLE `ups_import_export_commission` CHANGE `updated_at` `updated_at` DATETIME NULL DEFAULT NULL;
+
+6. ALTER TABLE `ups_import_export_commission` CHANGE `created_at` `created_at` DATETIME NULL DEFAULT NULL;
+
+7. ALTER TABLE `ups_import_export_commission` ADD `file_type` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+
+8. ALTER TABLE `ups_import_export_commission` ADD `commission` DECIMAL(20) NULL DEFAULT NULL AFTER `courier_type`;
+
+9 . ALTER TABLE `ups_import_export_commission` CHANGE `deleted` `deleted` ENUM('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0' COMMENT '\'1\' = deleted, \'0\' = \'not\'';
+
+10. ALTER TABLE `ups_import_export_commission` CHANGE `commission` `commission` DECIMAL(12,2) NULL DEFAULT NULL;
+
+
+Create new columns :
+-------------------
+2.11 - Done
+Live - Done
+
+Table : ups_details
+
+Query : ALTER TABLE `ups_details` ADD `commission_amount_approve` ENUM('Y','N') NULL DEFAULT NULL COMMENT '\'Y\'=\'approve\',\'N\'=\'not approve\'' AFTER `description`;
+
+
+Table : ups_freight_commission
+
+Query : ALTER TABLE `ups_freight_commission` ADD `pending_commission` DECIMAL(12,2) NULL DEFAULT NULL AFTER `commission`;
+
+
+
+30-04-2019
+----------
+2.11 - Done
+Live - Done
+Create New Table :- ccpack
+Create New Table :- ccpack_invoice_item_details
+
+Queries : 
+---------
+
+1.ALTER TABLE `ccpack` ADD `awb_number` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+
+2.ALTER TABLE `ccpack` ADD `arrival_date` DATE NULL DEFAULT NULL AFTER `freight`;
+
+3.ALTER TABLE `ccpack` CHANGE `ccpack_oparation_type` `ccpack_operation_type` INT(20) NULL DEFAULT NULL;
+
+4. ALTER TABLE `ccpack` ADD `file_number` VARCHAR(255) NULL DEFAULT NULL AFTER `ccpack_oparation_type`;
+
+5. ALTER TABLE `ccpack` CHANGE `deleted` `deleted` ENUM('0','1') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT '0' COMMENT '\'1\'=\'deleted\',\'0\'=\'not\'';
+
+Create New Table : ccpack_invoices
+------------------ 
+
+Queries :
+---------
+
+1 .ALTER TABLE `ccpack_invoices` CHANGE `ups_id` `ccpack_id` INT(111) NULL DEFAULT NULL;
+
+
+
+01-05-2019
+----------
+
+2.11 - Done
+Live - Done
+
+Table : ccpack
+
+1. ALTER TABLE `ccpack` ADD `customs` DECIMAL(12,2) NULL DEFAULT NULL AFTER `freight`;
+
+2. ALTER TABLE `ccpack` ADD `commission` DECIMAL(12,2) NULL DEFAULT NULL AFTER `freight`;
+
+
+02-05-2019
+----------
+2.11 : Done
+Live - Done
+Table : invoice_payments
+
+1. ALTER TABLE `invoice_payments` ADD `ccpack_id` INT(111) NULL DEFAULT NULL AFTER `ups_id`;
+
+
+03-05-2019
+----------
+2.11 : Done
+Live - Done
+
+1 .ALTER TABLE `ccpack` CHANGE `customs` `expences` DECIMAL(12,2) NULL DEFAULT NULL;
+
+
+
+07-05-2019
+----------
+2.11 : Done
+Live - Done
+
+Table : invoices_payments
+
+Query : ALTER TABLE `invoice_payments` ADD `aeropost_id` INT(111) NULL DEFAULT NULL AFTER `ccpack_id`, ADD INDEX `aeropost_id` (`aeropost_id`);
+
+
+08-05-2019
+----------
+2.11 : Done
+Live - Done
+
+New Table
+- inprogress_status
+
+ Query: 
+
+ 1. ALTER TABLE `ups_details` CHANGE `ups_status` `ups_scan_status` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
+ 2.ALTER TABLE `ups_details` ADD `inprogress_scan_status` INT NULL DEFAULT NULL AFTER `ups_scan_status`, ADD INDEX `inprogress_status_id` (`inprogress_scan_status`);
+
+ 3. ALTER TABLE `ups_details` ADD `other_status` TEXT NULL DEFAULT NULL AFTER `inprogress_scan_status`;
+
+ 
+
+ 10-05-2019
+ ----------
+2.11 : Done
+Live - Done
+table : ccpack
+  query : 
+
+  1.ALTER TABLE `ccpack` ADD `ccpack_scan_status` INT NULL DEFAULT NULL AFTER `arrival_date`;
+  2.ALTER TABLE `ccpack` ADD `warehouse_id` INT NULL DEFAULT NULL AFTER `ccpack_scan_status`;
+  
+
+table : aeroporst
+  query : 
+  
+  1.ALTER TABLE `aeropost` ADD `aeropost_scan_status` INT NULL DEFAULT NULL AFTER `custom_value`;
+  2.ALTER TABLE `aeropost` ADD `warehouse_id` INT NULL DEFAULT NULL AFTER `aeropost_scan_status`;
+
+
+
+
+27-05-2019
+----------
+2.11 - Done
+Live - Done
+
+Table : expenses
+
+Query : ALTER TABLE `expenses` ADD `quick_book_id` INT NULL DEFAULT NULL AFTER `expense_id`;
+
+
+
+30-05-2019
+----------
+2.11 - Done
+Live - Pending
+
+Table : vendors
+
+Queries : 
+---------
+
+1. ALTER TABLE `vendors` CHANGE `name` `first_name` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+2.ALTER TABLE `vendors` ADD `middle_name` VARCHAR(255) NULL DEFAULT NULL AFTER `first_name`, ADD `last_name` VARCHAR(255) NULL DEFAULT NULL AFTER `middle_name`;
+
+3.ALTER TABLE `vendors` CHANGE `company_address` `street` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
+
+4.ALTER TABLE `vendors` ADD `city` VARCHAR(255) NULL DEFAULT NULL AFTER `street`, ADD `state` VARCHAR(255) NULL DEFAULT NULL AFTER `city`, ADD `zipcode` VARCHAR(255) NULL DEFAULT NULL AFTER `state`, ADD `country` VARCHAR(255) NULL DEFAULT NULL AFTER `zipcode`;
+
+
+31-05-2019
+----------
+2.11 - Done
+Live - Pending
+
+Table : venders
+
+Query
+-----
+1.ALTER TABLE `vendors` ADD `quick_book_id` INT(111) NULL DEFAULT NULL AFTER `id`;
+
+
+
+03-05-2019
+----------
+2.11 - Done
+Live - Pending
+
+Table : costs
+
+Query
+-----
+1.ALTER TABLE `costs` ADD `quick_book_id` INT NULL DEFAULT NULL AFTER `id`;
+
+
+04-05-2019
+----------
+2.11 - Done
+Live - Pending
+
+Table : cashcredit
+
+Query
+-----
+1.ALTER TABLE `cashcredit` ADD `quick_book_id` INT NULL DEFAULT NULL AFTER `id`;
+
+
+Table : clients
+Query
+-----
+1.ALTER TABLE `clients` ADD `currency` INT NULL DEFAULT '1' AFTER `fax`;
+2.ALTER TABLE `clients` CHANGE `currency` `currency` VARCHAR(255) NULL DEFAULT NULL;
+
+
+
+10-05-2019
+----------
+2.11 - Done
+Live - Pending
+live-v1 - done
+Table : ups_uploaded_files
+
+Query :
+------
+1.ALTER TABLE `ups_uploaded_files` CHANGE `deleted` `deleted` ENUM('0','1') NULL DEFAULT '0';
+
+2.ALTER TABLE `ups_uploaded_files` ADD `file_id` INT NULL DEFAULT NULL AFTER `id`, ADD INDEX `file Id` (`file_id`);
+
+
+24-06-2019
+----------
+2.11 - Done
+Live - Pending
+live-v1 - done
+live_duplicate - done
+Table - other_expenses
+
+Query = ALTER TABLE `other_expenses` ADD `type` VARCHAR(255) NULL DEFAULT NULL AFTER `id`;
+
+
+---------------------------------------------------------------------------------------
+
+27-06-2019
+----------
+
+2.11 - done
+live-v1 - done
+live_duplicate - done
+live - pending
+
+Query : ALTER TABLE `vendors` ADD `currency` INT(20) NULL DEFAULT NULL AFTER `company_phone`;
+
+----------------------------------------------------------------------------------------
+
+28-06-2019
+----------
+
+2.11 - done
+live-v1 - done
+live_duplicate - done
+live - pending
+
+Query : ALTER TABLE `vendors` ADD `currency_code` VARCHAR(255) NULL AFTER `currency`;
+
+
+
+02-07-2019
+----------
+
+2.11 - done
+live-v1 - done
+live_duplicate - done
+live - pending
+
+New Table : quickbook_error_logs

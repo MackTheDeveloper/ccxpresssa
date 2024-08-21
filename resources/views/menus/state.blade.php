@@ -1,0 +1,2 @@
+<a href="{{ route('createstate') }}"><i style="color: #fff" class="fa fa-plus-circle fa-2x"></i><span class="menuname">Add State</span></a>
+    <a style="margin-left: 10px" href="{{ route('states') }}"><i style="color: #fff" class="fa fa-list fa-2x"></i><span class="menuname">States</span></a>

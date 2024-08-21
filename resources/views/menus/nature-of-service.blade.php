@@ -1,0 +1,2 @@
+<a href="{{ route('createnatureofservice') }}"><i style="color: #fff" class="fa fa-plus-circle fa-2x"></i><span class="menuname">Add Nature Of Service</span></a>
+    <a style="margin-left: 10px" href="{{ route('natureofservices') }}"><i style="color: #fff" class="fa fa-list fa-2x"></i><span class="menuname">Nature Of Services</span></a>
