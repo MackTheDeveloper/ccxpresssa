@@ -54,39 +54,13 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-
-        /* 's3' => [
-            'driver' => 's3',
-            'key' => 'AKIAYRVCP4JK7ZY377GV',
-            'secret' => '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',
-            'region' => 'us-east-1',
-            'bucket' => 'cargo-live-site',
-        ], */
-        
-        // 's3' => [
-        //     'driver' => 's3',
-        //     'key' => 'AKIAYRVCP4JKZPIAAYAH',
-        //     'secret' => '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',
-        //     'region' => 'us-east-1',
-        //     'bucket' => 'cargo-live-site',
-        // ],
-
-        // 's3' => [
-        //     'driver' => 's3',
-        //     'key' => 'AKIAYRVCP4JK7KSUXUYV',
-        //     'secret' => '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',
-        //     'region' => 'us-east-1',
-        //     'bucket' => 'cargo-live-site',
-        // ],
-        // 4th June 2024 changed s3 key
         's3' => [
             'driver' => 's3',
-            'key' => 'AKIAYRVCP4JKURMUMVEF',
-            'secret' => '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',
-            'region' => 'us-east-1',
-            'bucket' => 'cargo-live-site',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
         ],
-
     ],
 
 ];
