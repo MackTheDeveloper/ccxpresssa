@@ -3,6 +3,7 @@
 /public/storage
 /public/reports_pdf
 /storage/*.key
+/storage/logs
 /vendor
 /.idea
 /.vagrant
