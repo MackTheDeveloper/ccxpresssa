@@ -1,0 +1,2 @@
+<a href="{{ route('createclientaddress') }}"><i style="color: #fff" class="fa fa-plus-circle fa-2x"></i><span class="menuname">Add Client Address</span></a>
+    <a style="margin-left: 10px" href="{{ route('clientaddresses') }}"><i style="color: #fff" class="fa fa-list fa-2x"></i><span class="menuname">Client Addresses</span></a>

@@ -1,0 +1,2 @@
+<a href="{{ route('createclientcontact') }}"><i style="color: #fff" class="fa fa-plus-circle fa-2x"></i><span class="menuname">Add Client Contact</span></a>
+    <a style="margin-left: 10px" href="{{ route('clientcontacts') }}"><i style="color: #fff" class="fa fa-list fa-2x"></i><span class="menuname">Client Contacts</span></a>

@@ -1,0 +1,3 @@
+<?php $currentRoute = Route::currentRouteName(); $currentParams = Route::current()->parameters()['permissionFlag'];  ?>
+<a class="<?php echo $currentRoute == "permissions" && $currentParams == '1' ? "activeMenu" : ""; ?>" href="{{ route('permissions','1') }}"><i style="color: #fff" class="fa fa-user-circle fa-2x"></i><span class="menuname">User Permissions</span></a>
+<a class="<?php echo $currentRoute == "permissions" && $currentParams == '2' ? "activeMenu" : ""; ?>" style="margin-left: 10px" href="{{ route('permissions','2') }}"><i style="color: #fff" class="fa fa-group fa-2x"></i><span class="menuname">Group Permissions</span></a>

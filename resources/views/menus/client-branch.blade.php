@@ -1,0 +1,2 @@
+<a href="{{ route('createclientbranch') }}"><i style="color: #fff" class="fa fa-plus-circle fa-2x"></i><span class="menuname">Add Client Branch</span></a>
+    <a style="margin-left: 10px" href="{{ route('clientbranches') }}"><i style="color: #fff" class="fa fa-list fa-2x"></i><span class="menuname">Client Branches</span></a>

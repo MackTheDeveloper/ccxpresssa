@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Combine Report</title>
+</head>
+
+<body>
+	<?php
+	if ($moduleType == 'cargo') {
+		$moduleName = 'Cargo';
+	} else {
+		if ($courierType == '1')
+			$moduleName = 'Ups';
+		else if ($courierType == '2')
+			$moduleName = 'Aeropost';
+		else if ($courierType == '3')
+			$moduleName = 'CCPack';
+		else if ($courierType == '4')
+			$moduleName = 'Ups Master';
+		else if ($courierType == '5')
+			$moduleName = 'Aeropost Master';
+		else if ($courierType == '6')
+			$moduleName = 'CCPack Master';
+	}
+	?>
+	<section class="content" style="font-family: sans-serif;">
+
+		<div class="box box-success" style="width: 100%;margin: 0px auto;">
+			<div class="box-body cargo-forms" style="color: #000">
+				<h3 style="background: #ccc;padding:5px;font-weight:normal;width:100%">
+					<div style="width:50%;float:left">Combine Report - {{$moduleName}}</div>
+					<div style="text-align: right;float: left; width: 50%; font-size: 18px; font-weight: 600;text-transform: uppercase;">
+						<?php if (!empty($fromDate) && !empty($toDate)) {
+							echo date('d-m-Y', strtotime($fromDate)) . ' To ' . date('d-m-Y', strtotime($toDate));
+						}
+						?>
+					</div>
+				</h3>
+
+				<table class="table" id="example1" CELLSPACING="0" CELLPADDING="0" width="100%" class="joureny" style="overflow: wrap; text-align:left; font-variant: normal; font-weight: normal;font-size: 14px;background-color: fff;line-height: 20px;font-family: Asap, sans-serif;color: #000;padding: 0;font-style: normal;border:solid 1px hsl(0, 0%, 86%);margin-top:15px; width:900px;border-collapse: collapse">
+					<thead>
+						<tr>
+							<th style="border-right:1px solid hsl(0, 0%, 86%);border-bottom:1px solid hsl(0, 0%, 86%); border-top: 1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">Date</th>
+							<th width="50px" style="border-right:1px solid hsl(0, 0%, 86%);border-bottom:1px solid hsl(0, 0%, 86%); border-top: 1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">File Number</th>
+							<th width="50px" style="border-right:1px solid hsl(0, 0%, 86%);border-bottom:1px solid hsl(0, 0%, 86%); border-top: 1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">AWB / BL No.</th>
+							<th width="50px" style="border-right:1px solid hsl(0, 0%, 86%);border-bottom:1px solid hsl(0, 0%, 86%); border-top: 1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">Billing Party</th>
+							<th width="50px" style="border-right:1px solid hsl(0, 0%, 86%);border-bottom:1px solid hsl(0, 0%, 86%); border-top: 1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">Total Amount</th>
+							<th width="80px" style="border-right:1px solid hsl(0, 0%, 86%); border-bottom:1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">Credits</th>
+							<th width="80px" style="border-right:1px solid hsl(0, 0%, 86%); border-bottom:1px solid hsl(0, 0%, 86%); border-collapse: collapse;padding: 5px;text-align: left;">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php if (!empty($data)) {
+							foreach ($data as $k => $v) {
+						?>
+								<tr>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: left;"><?php echo date('d-m-Y', strtotime($v->date)); ?></td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: left;"><?php echo $v->file_no; ?></td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: left;"><?php echo $v->awb_no; ?></td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: left;">
+										<?php $dataUser = app('App\Clients')->getClientData($v->bill_to);
+										echo !empty($dataUser->company_name) ? strtoupper($dataUser->company_name) : "-"; ?>
+									</td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: right;">{{ $v->total }}</td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: right;">{{ $v->credits }}</td>
+									<td style="border-bottom:1px solid hsl(0, 0%, 86%);border-right:1px solid hsl(0, 0%, 86%); padding:5px;font-family: Asap, sans-serif;font-size:14px; border-collapse: collapse;text-align: left;<?php echo ($v->payment_status == 'Paid') ? 'color:green' : 'color:red'; ?>">
+										<?php echo !empty($v->payment_status) ? $v->payment_status : '-'; ?>
+									</td>
+								</tr>
+						<?php }
+						} ?>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+
+</html>

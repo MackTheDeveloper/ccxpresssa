@@ -1,0 +1,58 @@
+.editupscontainer .panel .panel-heading .panel-title {
+    font-size: 15px;
+    float: left;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0;
+    font-weight: bold;
+}
+.editupscontainer .menulink {
+    color: #fff;
+    background-color: #2ab27b;
+    border-color: #259d6d;
+    float: right;
+    border: none;
+    font-size: 15px;
+    border: 1px solid #f2f4f8;
+    border-radius: 2px;
+    padding: 7px 30px;
+    cursor: pointer;
+    margin: -4px 5px;
+    
+}
+.editupscontainer .menulinkcancel {
+    float: right;
+    color: #fff;
+    font-size: 15px;
+    border: 1px solid #aa4a24;
+    border-radius: 2px;
+    padding: 7px 30px;
+    cursor: pointer;
+    margin: -4px 5px;
+    background: #bf5329;
+}
+
+.editupscontainer .nav-tabs.nav-justified>.active>a, .editupscontainer .nav-tabs.nav-justified>.active>a:focus, .editupscontainer .nav-tabs.nav-justified>.active>a:hover {
+    border-bottom-color: #737D90;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    background: none;
+}
+.editupscontainer .nav-tabs li a {color: #99A2B3;}
+.editupscontainer .but_list, .editupscontainer .tab-content {
+    margin: 1.5em 0 0 0;
+}
+.editupscontainer .table > thead > tr > th {
+    border-bottom: 1px solid #ddd !important;
+    /* font-family: 'wf_segoe-ui_bold'; */
+}
+.editupscontainer .table>tbody>tr>td { border-top: none  }
+.editupscontainer .nav-tabs>li.active>a, .editupscontainer .nav-tabs>li.active>a:focus, .editupscontainer .nav-tabs>li.active>a:hover {
+    color: #555 !important;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
